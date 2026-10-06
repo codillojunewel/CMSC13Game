@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.FPlayGame">
+   <children>
+      <Label layoutX="254.0" layoutY="58.0" prefHeight="27.0" prefWidth="92.0" text="Start Sceen">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="207.0" layoutY="194.0" mnemonicParsing="false" onAction="#switchtoMainMenu" prefHeight="25.0" prefWidth="57.0" text="Back" />
+      <Button layoutX="326.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Start" />
+   </children>
+</AnchorPane>
