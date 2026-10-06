@@ -13,8 +13,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="186.0" layoutY="206.0" mnemonicParsing="false" text="Instructions" />
-      <Button layoutX="344.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Settings" />
-      <Button layoutX="277.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" text="Exit" />
+      <Button layoutX="186.0" layoutY="206.0" mnemonicParsing="false" onAction="#switchtoInstructions" text="Instructions" />
+      <Button layoutX="344.0" layoutY="206.0" mnemonicParsing="false" onAction="#switchtoSettings" prefHeight="25.0" prefWidth="78.0" text="Settings" />
+      <Button layoutX="277.0" layoutY="247.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="46.0" text="Exit" />
    </children>
 </AnchorPane>
