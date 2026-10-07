@@ -9,8 +9,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.FSettings">
    <children>
-      <Button layoutX="227.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchtoMainMenu" text="Back" />
-      <Button layoutX="332.0" layoutY="277.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="209.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchtoMainMenu" prefHeight="25.0" prefWidth="64.0" text="Back" />
+      <Button layoutX="332.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Save" />
       <Label layoutX="268.0" layoutY="49.0" text="Settings">
          <font>
             <Font size="18.0" />
