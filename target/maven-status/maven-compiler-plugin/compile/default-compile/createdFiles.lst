@@ -1,3 +1,8 @@
+com\cmsc13\frontend\FInstructions.class
 com\cmsc13\Main.class
 com\cmsc13\frontend\FSplahScreen.class
-com\cmsc13\frontend\ScreenController.class
+com\cmsc13\frontend\Game.class
+com\cmsc13\frontend\Camera.class
+com\cmsc13\frontend\FMainMenu.class
+com\cmsc13\frontend\FPlayGame.class
+com\cmsc13\frontend\FSettings.class

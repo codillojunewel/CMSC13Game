@@ -24,6 +24,15 @@ public class FPlayGame {
 
     }
 
+    public void switchtoGame(ActionEvent event)throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fxml/Game.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     
 }
  
