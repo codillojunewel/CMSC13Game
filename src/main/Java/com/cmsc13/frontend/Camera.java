@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+
+
 public class Camera {
 
     @FXML private Pane cameraPane;
@@ -337,29 +339,30 @@ public class Camera {
 
     @FXML
     private void handleBack() {
-
-        // Release the camera before changing screens.
         shutdownCamera();
 
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        Scene quizScene = QuizController.getReturnScene();
+
+        if (quizScene != null) {
+            stage.setScene(quizScene);
+            stage.show();
+            return;
+        }
+
+        // Fallback if the camera screen was opened directly.
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/fxml/MainMenu.fxml")
             );
 
-            Scene scene = new Scene(loader.load());
-
-            Stage stage = (Stage) backButton
-                    .getScene()
-                    .getWindow();
-
-            stage.setScene(scene);
+            stage.setScene(new Scene(loader.load()));
             stage.show();
 
         } catch (IOException | RuntimeException e) {
             showError(
-                    "Could not open the previous screen.\n"
-                            + "Check the path /fxml/MainMenu.fxml.\n\n"
-                            + e.getMessage()
+                    "Could not return to the main menu.\n"
+                    + e.getMessage()
             );
         }
     }

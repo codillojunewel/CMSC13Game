@@ -5,14 +5,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.FPlayGame">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.FPlayGame">
    <children>
-      <Label layoutX="254.0" layoutY="58.0" prefHeight="27.0" prefWidth="92.0" text="Start Sceen">
+      <Label layoutX="538.0" layoutY="76.0" prefHeight="53.0" prefWidth="188.0" text="Start Sceen">
          <font>
-            <Font size="18.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="207.0" layoutY="194.0" mnemonicParsing="false" onAction="#switchtoMainMenu" prefHeight="25.0" prefWidth="57.0" text="Back" />
-      <Button layoutX="326.0" layoutY="194.0" mnemonicParsing="false" onAction="#switchtoGame" prefHeight="25.0" prefWidth="57.0" text="Start" />
+      <Button layoutX="533.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchtoMainMenu" prefHeight="39.0" prefWidth="73.0" text="Back">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="647.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchtoGame" prefHeight="39.0" prefWidth="73.0" text="Start">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>
