@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.cmsc13.frontend.ui.ConfettiCanvas?>
+<?import com.cmsc13.frontend.ui.PixelText?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Final "Audit Passed: Employment Retained" screen, built on the Level Complete artwork (mockup 2.3) -->
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cmsc13.frontend.VictoryController">
+    <ImageView fitWidth="1280" fitHeight="720">
+        <image><Image url="@../images/victory_bg.jpg"/></image>
+    </ImageView>
+    <ConfettiCanvas/>
+
+    <!-- title banner over the artwork's title area -->
+    <VBox fx:id="banner" styleClass="victory-banner" alignment="CENTER" spacing="6"
+          layoutX="262" layoutY="40" prefWidth="786" prefHeight="166">
+        <HBox alignment="CENTER" spacing="26">
+            <PixelText bold="true" text="AUDIT" pixel="7" fontSize="11" color="#9fe4ff" bottomColor="#2f8cff" glow="#2f8cff"/>
+            <PixelText bold="true" text="PASSED!" pixel="7" fontSize="11" color="#fff3a0" bottomColor="#ffaa00" glow="#ffb000"/>
+        </HBox>
+        <PixelText bold="true" text="* EMPLOYMENT RETAINED *" pixel="3" fontSize="10" color="#ffffff" glow="#2f8cff"/>
+    </VBox>
+
+    <HBox alignment="CENTER" layoutY="548" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" mouseTransparent="true">
+            <Label fx:id="statsLabel" styleClass="hud-pill"/>
+        </HBox>
+
+    <!-- labels painted on the two drawn buttons -->
+    <StackPane layoutX="300" layoutY="592" prefWidth="297" prefHeight="85" mouseTransparent="true">
+        <Label text="Main Menu" styleClass="art-button-label"/>
+    </StackPane>
+    <StackPane layoutX="653" layoutY="592" prefWidth="334" prefHeight="85" mouseTransparent="true">
+        <Label text="New Audit" styleClass="art-button-label"/>
+    </StackPane>
+    <Button layoutX="300" layoutY="592" prefWidth="297" prefHeight="85"
+            styleClass="hotspot, hotspot-blue" onAction="#menu"/>
+    <Button fx:id="againButton" layoutX="653" layoutY="592" prefWidth="334" prefHeight="85"
+            styleClass="hotspot, hotspot-green" onAction="#again" defaultButton="true"/>
+</AnchorPane>

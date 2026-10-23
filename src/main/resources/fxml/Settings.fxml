@@ -1,30 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.cmsc13.frontend.ui.PixelText?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
+<!-- Settings: drawn inside the neon frame from the splash mockup -->
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cmsc13.frontend.SettingsController">
+    <ImageView fitWidth="1280" fitHeight="720">
+        <image><Image url="@../images/frame_bg.jpg"/></image>
+    </ImageView>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.FSettings">
-   <children>
-      <Button layoutX="209.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchtoMainMenu" prefHeight="25.0" prefWidth="64.0" text="Back" />
-      <Button layoutX="332.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Save" />
-      <Label layoutX="268.0" layoutY="49.0" text="Settings">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="169.0" layoutY="107.0" text="Sound:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Slider layoutX="230.0" layoutY="110.0" />
-      <Label layoutX="169.0" layoutY="149.0" text="Music:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Slider layoutX="230.0" layoutY="152.0" />
-   </children>
+    <HBox alignment="CENTER" layoutY="74" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <PixelText bold="true" text="SETTINGS" pixel="4" fontSize="11" color="#ffffff" bottomColor="#9fd8ff" glow="#2f8cff"/>
+    </HBox>
+
+    <GridPane hgap="30" vgap="26" layoutX="240" layoutY="160">
+        <PixelText text="MUSIC" pixel="2" fontSize="10" color="#5fd0ff" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <HBox spacing="14" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="1">
+            <Slider fx:id="musicSlider" min="0" max="100" prefWidth="420"/>
+            <Label fx:id="musicValue" minWidth="50" styleClass="frame-value"/>
+        </HBox>
+
+        <PixelText text="SOUND FX" pixel="2" fontSize="10" color="#5fd0ff" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <HBox spacing="14" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <Slider fx:id="sfxSlider" min="0" max="100" prefWidth="420"/>
+            <Label fx:id="sfxValue" minWidth="50" styleClass="frame-value"/>
+        </HBox>
+
+        <PixelText text="TIMER" pixel="2" fontSize="10" color="#5fd0ff" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <VBox spacing="6" GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <HBox fx:id="timerButtons" spacing="10"/>
+            <Label fx:id="timerHint" styleClass="frame-hint"/>
+        </VBox>
+
+        <PixelText text="WEBCAM" pixel="2" fontSize="10" color="#5fd0ff" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <VBox spacing="6" GridPane.rowIndex="3" GridPane.columnIndex="1">
+            <HBox spacing="10">
+                <ToggleButton fx:id="webcamOn" text="Real webcam (recorded)"/>
+                <ToggleButton fx:id="webcamOff" text="Simulated (no camera)"/>
+            </HBox>
+            <Label text="Recorded confessions are saved on this computer only." styleClass="frame-hint"/>
+        </VBox>
+
+        <PixelText text="DATABASE" pixel="2" fontSize="10" color="#5fd0ff" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <HBox spacing="12" alignment="CENTER_LEFT" GridPane.rowIndex="4" GridPane.columnIndex="1">
+            <Button styleClass="neon-btn, neon-btn-blue, neon-btn-small" onAction="#openFolder">
+                <graphic><PixelText text="OPEN CONFESSIONS" pixel="2" fontSize="9" color="#55b8ff"/></graphic>
+            </Button>
+            <Button fx:id="resetButton" styleClass="neon-btn, neon-btn-red, neon-btn-small" onAction="#resetStats">
+                <graphic><PixelText fx:id="resetText" text="RESET STATS" pixel="2" fontSize="9" color="#ff5c6c"/></graphic>
+            </Button>
+        </HBox>
+    </GridPane>
+
+    <Label fx:id="statusLabel" styleClass="frame-status" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+           layoutY="556" alignment="CENTER" maxWidth="Infinity"/>
+
+    <HBox alignment="CENTER" spacing="22" layoutY="598" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Button styleClass="neon-btn, neon-btn-blue" onAction="#back">
+            <graphic><PixelText bold="true" text="&lt; BACK" pixel="3" fontSize="9" color="#55b8ff"/></graphic>
+        </Button>
+        <Button styleClass="neon-btn, neon-btn-green" onAction="#save">
+            <graphic><PixelText bold="true" text="SAVE" pixel="3" fontSize="9" color="#43ff6b"/></graphic>
+        </Button>
+    </HBox>
 </AnchorPane>

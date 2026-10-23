@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+
+<!-- "Fatal Core Dump" defeat screen: mockup 2.3 (error image) -->
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cmsc13.frontend.DefeatController">
+    <ImageView fx:id="art" fitWidth="1280" fitHeight="720">
+        <image><Image url="@../images/defeat_bg.jpg"/></image>
+    </ImageView>
+    <Pane fx:id="glitchLayer" mouseTransparent="true"/>
+
+    <!-- live values printed into the SYSTEM ERROR box -->
+    <Label fx:id="codeLabel" layoutX="941" layoutY="163" styleClass="error-code"/>
+
+    <Region fx:id="flicker" prefWidth="1280" prefHeight="720" style="-fx-background-color: #ff1030;"
+            opacity="0" mouseTransparent="true"/>
+
+    <!-- the drawn "OK" button in the error dialog -->
+    <Button fx:id="okButton" layoutX="186" layoutY="368" prefWidth="96" prefHeight="27"
+            styleClass="hotspot, hotspot-red" onAction="#proceed"/>
+
+    <Label fx:id="hintLabel" styleClass="defeat-hint" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+           AnchorPane.bottomAnchor="18" alignment="CENTER" maxWidth="Infinity"/>
+</AnchorPane>

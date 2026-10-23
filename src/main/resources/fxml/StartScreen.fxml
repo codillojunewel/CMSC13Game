@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.cmsc13.frontend.ui.PixelText?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.FPlayGame">
-   <children>
-      <Label layoutX="538.0" layoutY="76.0" prefHeight="53.0" prefWidth="188.0" text="Start Sceen">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Button layoutX="533.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchtoMainMenu" prefHeight="39.0" prefWidth="73.0" text="Back">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-      <Button layoutX="647.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchtoGame" prefHeight="39.0" prefWidth="73.0" text="Start">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-   </children>
-</AnchorPane>
+<!-- Studio start screen: mockup 2.2 (second image) with the drawn "Start" button. -->
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.cmsc13.frontend.CheckInController">
+    <AnchorPane>
+        <ImageView fitWidth="1280" fitHeight="720">
+            <image><Image url="@../images/start_bg.jpg"/></image>
+        </ImageView>
+        <Button fx:id="startButton" layoutX="547" layoutY="218" prefWidth="235" prefHeight="74"
+                styleClass="hotspot, hotspot-cyan" onAction="#openCheckIn"/>
+        <Button layoutX="10" layoutY="8" styleClass="neon-btn, neon-btn-blue, neon-btn-small" onAction="#back">
+            <graphic><PixelText text="&lt; BACK" pixel="2" fontSize="9" color="#55b8ff"/></graphic>
+        </Button>
+    </AnchorPane>
+
+    <!-- Employee check-in dialog -->
+    <StackPane fx:id="overlay" styleClass="overlay-dim" visible="false">
+        <VBox fx:id="dialog" styleClass="mock-panel" spacing="12" maxWidth="860" maxHeight="600" alignment="TOP_CENTER">
+            <padding><Insets top="22" bottom="22" left="34" right="34"/></padding>
+            <PixelText bold="true" text="EMPLOYEE CHECK-IN" pixel="3" fontSize="11" color="#ffffff" bottomColor="#8fd3ff" glow="#2f8cff"/>
+            <Label fx:id="memoLabel" styleClass="memo-text" wrapText="true" minHeight="120" alignment="TOP_LEFT" maxWidth="Infinity"/>
+            <Label text="TODAY'S JUNIOR DEV PROCTORS" styleClass="mock-caption"/>
+            <HBox fx:id="proctorRow" spacing="10" alignment="CENTER"/>
+            <Label text="State your name for the record:" styleClass="mock-caption" maxWidth="Infinity"/>
+            <TextField fx:id="nameField" styleClass="mock-field" promptText="e.g. Carl" onAction="#begin"/>
+            <Label fx:id="errorLabel" styleClass="error-text"/>
+            <HBox spacing="18" alignment="CENTER">
+                <Button styleClass="neon-btn, neon-btn-blue" onAction="#closeCheckIn">
+                    <graphic><PixelText bold="true" text="CANCEL" pixel="3" fontSize="9" color="#55b8ff"/></graphic>
+                </Button>
+                <Button fx:id="beginButton" styleClass="neon-btn, neon-btn-green" onAction="#begin" defaultButton="true">
+                    <graphic><PixelText bold="true" text="BEGIN AUDIT" pixel="3" fontSize="9" color="#43ff6b"/></graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </StackPane>
+</StackPane>

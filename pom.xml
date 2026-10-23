@@ -9,22 +9,23 @@
 
     <groupId>com.cmsc13</groupId>
     <artifactId>CMSC13Game</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
+    <name>Are You Smarter Than a Junior Dev?</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
         <javafx.version>17.0.13</javafx.version>
+        <app.main>com.cmsc13.Main</app.main>
+        <launcher.class>com.cmsc13.Launcher</launcher.class>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -35,41 +36,124 @@
             <artifactId>javafx-swing</artifactId>
             <version>${javafx.version}</version>
         </dependency>
-
+        <!-- Webcam access + video recording for the Public Humiliation Protocol -->
         <dependency>
             <groupId>org.openpnp</groupId>
             <artifactId>opencv</artifactId>
             <version>4.9.0-0</version>
         </dependency>
+        <!-- Parses the external question bank (questions.json) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.18.3</version>
         </dependency>
-
     </dependencies>
 
     <build>
+        <sourceDirectory>src/main/Java</sourceDirectory>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
             </plugin>
 
+            <!-- mvn javafx:run -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-
                 <configuration>
-                    <mainClass>com.cmsc13.Main</mainClass>
+                    <mainClass>${app.main}</mainClass>
                 </configuration>
-
             </plugin>
 
+            <!-- mvn package  ->  target/JuniorDev.jar (one runnable "fat JAR") -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>JuniorDev</finalName>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${launcher.class}</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>module-info.class</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
+    <profiles>
+        <!-- mvn package -Pexe  ->  target/JuniorDev.exe (Launch4j wrapper around the fat JAR) -->
+        <profile>
+            <id>exe</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                        <artifactId>launch4j-maven-plugin</artifactId>
+                        <version>2.5.0</version>
+                        <executions>
+                            <execution>
+                                <id>l4j-gui</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>launch4j</goal>
+                                </goals>
+                                <configuration>
+                                    <headerType>gui</headerType>
+                                    <jar>${project.build.directory}/JuniorDev.jar</jar>
+                                    <outfile>${project.build.directory}/JuniorDev.exe</outfile>
+                                    <icon>${project.basedir}/packaging/icon.ico</icon>
+                                    <errTitle>Are You Smarter Than a Junior Dev?</errTitle>
+                                    <jre>
+                                        <path>%JAVA_HOME%;%PATH%</path>
+                                        <minVersion>17</minVersion>
+                                        <initialHeapSize>128</initialHeapSize>
+                                        <maxHeapSize>512</maxHeapSize>
+                                    </jre>
+                                    <versionInfo>
+                                        <fileVersion>1.0.0.0</fileVersion>
+                                        <txtFileVersion>1.0.0</txtFileVersion>
+                                        <fileDescription>Are You Smarter Than a Junior Dev?</fileDescription>
+                                        <copyright>CMSC 13 Group 7</copyright>
+                                        <productVersion>1.0.0.0</productVersion>
+                                        <txtProductVersion>1.0.0</txtProductVersion>
+                                        <productName>Are You Smarter Than a Junior Dev?</productName>
+                                        <internalName>JuniorDev</internalName>
+                                        <originalFilename>JuniorDev.exe</originalFilename>
+                                    </versionInfo>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

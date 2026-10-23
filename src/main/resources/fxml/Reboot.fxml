@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.cmsc13.frontend.ui.PixelText?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<!-- Forced reboot: terminal inside the neon frame from the splash mockup -->
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cmsc13.frontend.RebootController">
+    <ImageView fitWidth="1280" fitHeight="720">
+        <image><Image url="@../images/frame_bg.jpg"/></image>
+    </ImageView>
+
+    <HBox alignment="CENTER" layoutY="74" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <PixelText bold="true" text="FORCED REBOOT" pixel="4" fontSize="11" color="#ffffff" bottomColor="#9fd8ff" glow="#2f8cff"/>
+    </HBox>
+
+    <Label fx:id="terminal" layoutX="215" layoutY="150" prefWidth="850" prefHeight="360" wrapText="true"
+           alignment="TOP_LEFT" styleClass="terminal-text"/>
+
+    <HBox layoutX="215" layoutY="528" spacing="14" alignment="CENTER_LEFT">
+        <Label fx:id="progressLabel" text="REBOOTING" styleClass="terminal-text" minWidth="130"/>
+        <ProgressBar fx:id="progressBar" prefWidth="700" prefHeight="20" progress="0" styleClass="splash-bar"/>
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="22" layoutY="598" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Button fx:id="menuButton" styleClass="neon-btn, neon-btn-blue" onAction="#quit" visible="false">
+            <graphic><PixelText bold="true" text="QUIT TO MENU" pixel="3" fontSize="9" color="#55b8ff"/></graphic>
+        </Button>
+        <Button fx:id="continueButton" styleClass="neon-btn, neon-btn-green" onAction="#restart" visible="false" defaultButton="true">
+            <graphic><PixelText bold="true" text="RESTART FROM LEVEL 1" pixel="3" fontSize="9" color="#43ff6b"/></graphic>
+        </Button>
+    </HBox>
+</AnchorPane>

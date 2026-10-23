@@ -1,60 +1,56 @@
-
 package com.cmsc13;
 
+import com.cmsc13.audio.SoundManager;
+import com.cmsc13.frontend.SceneManager;
+import com.cmsc13.frontend.SceneManager.Screen;
+
 import javafx.application.Application;
-import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.application.HostServices;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
+
+/**
+ * Entry point of "Are You Smarter Than a Junior Dev?".
+ * <p>
+ * Architecture (MVC):
+ * <ul>
+ *   <li><b>Model</b> - {@code com.cmsc13.model}: questions, ladder, personas, lifelines, session rules.</li>
+ *   <li><b>View</b> - FXML layouts in {@code /fxml} styled by {@code /css/neon.css}.</li>
+ *   <li><b>Controller</b> - {@code com.cmsc13.frontend}: one controller per screen.</li>
+ * </ul>
+ */
 public class Main extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    private static HostServices hostServices;
 
-        // Display the splash screen first
-        Parent splash = FXMLLoader.load(
-            getClass().getResource("/fxml/SplashScreen.fxml")
-        );
+    @Override
+    public void start(Stage stage) {
+        hostServices = getHostServices();
 
         stage.setTitle("Are You Smarter Than a Junior Dev?");
-        stage.setScene(new Scene(splash));
-        stage.setResizable(false);
-        stage.show();
-
-        
-
-        // Load the main menu in the background
-        Task<FXMLLoader> loadingTask = new Task<>() {
-            @Override
-            protected FXMLLoader call() throws Exception {
-                Thread.sleep(5000);
-                FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/fxml/MainMenu.fxml")
-                );
-                
-                loader.load();
-                return loader;
+        try (InputStream icon = Main.class.getResourceAsStream("/images/icon.png")) {
+            if (icon != null) {
+                stage.getIcons().add(new Image(icon));
             }
-        };
+        } catch (Exception ignored) {
+        }
 
-        // Switch to the main menu after loading finishes
-        loadingTask.setOnSucceeded(event -> {
-            Parent mainMenu = loadingTask.getValue().getRoot();
+        SceneManager.init(stage);
+        SceneManager.show(Screen.SPLASH);
+        stage.show();
+    }
 
-            stage.setScene(new Scene(mainMenu));
-            stage.sizeToScene();
-            stage.centerOnScreen();
-        });
+    @Override
+    public void stop() {
+        SceneManager.shutdown();
+        SoundManager.get().shutdown();
+    }
 
-        loadingTask.setOnFailed(event -> {
-            loadingTask.getException().printStackTrace();
-        });
-
-        Thread thread = new Thread(loadingTask);
-        thread.setDaemon(true);
-        thread.start();
+    /** Lets screens open folders/links in the OS (e.g. the confessions folder). */
+    public static HostServices hostServices() {
+        return hostServices;
     }
 
     public static void main(String[] args) {

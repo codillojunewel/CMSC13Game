@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import com.cmsc13.frontend.ui.PixelText?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Rectangle?>
 
+<!-- Splash screen: mockup 2.1 "Splash Screen with Game Title" with a live loading bar -->
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cmsc13.frontend.SplashController" onMouseClicked="#skip">
+    <ImageView fitWidth="1280" fitHeight="720">
+        <image><Image url="@../images/splash_bg.jpg"/></image>
+    </ImageView>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="476.0" layoutY="291.0" text="Splash Screen">
-         <font>
-            <Font name="System Bold" size="48.0" />
-         </font>
-      </Label>
-   </children>
+    <Rectangle fx:id="barFill" layoutX="460" layoutY="549" width="0" height="17" arcWidth="3" arcHeight="3" fill="#1ec8ff">
+        <effect><DropShadow color="#1ec8ff" radius="14" spread="0.25"/></effect>
+    </Rectangle>
+    <PixelText fx:id="percentText" layoutX="797" layoutY="545" text="0%" pixel="2" fontSize="11" color="#3fd8ff" glow="#1e9fff"/>
 </AnchorPane>

@@ -1,64 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.cmsc13.frontend.ui.PixelText?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cmsc13.frontend.QuizController">
-   <children>
-      <Label layoutX="580.0" layoutY="3.0" prefHeight="53.0" prefWidth="94.0" text="Game">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutX="83.0" layoutY="58.0" prefHeight="419.0" prefWidth="1099.0" spacing="15.0" style="-fx-border-color: black; -fx-border-width: 2px;">
-         <children>
-            <VBox alignment="CENTER" prefHeight="128.0" prefWidth="1095.0" spacing="10.0">
-               <children>
-                  <Label fx:id="questionLabel" alignment="CENTER" contentDisplay="TOP" lineSpacing="5.0" prefWidth="1050.0" text="Question appears here" textAlignment="CENTER" textFill="#4808dd" wrapText="true">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
+<!-- Main game window: mockup 2.2 (third image). The question appears on the studio's big monitor. -->
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.cmsc13.frontend.GameController">
+    <AnchorPane fx:id="board">
+        <ImageView fitWidth="1280" fitHeight="720">
+            <image><Image url="@../images/game_bg.jpg"/></image>
+        </ImageView>
+
+        <!-- ALGORITHM FLOW panel highlights + desk highlight (drawn by the controller) -->
+        <Pane fx:id="flowLayer" mouseTransparent="true"/>
+        <Pane fx:id="deskLayer" mouseTransparent="true"/>
+
+        <!-- ===== Big monitor: question + options ===== -->
+        <VBox fx:id="screenBox" layoutX="421" layoutY="54" prefWidth="463" prefHeight="249" maxHeight="249" spacing="7">
+            <Label fx:id="questionLabel" styleClass="screen-question" wrapText="true" prefWidth="460"/>
+            <ScrollPane fx:id="optionsScroll" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                <VBox fx:id="optionsBox" spacing="6"/>
+            </ScrollPane>
+        </VBox>
+
+        <!-- Result shown on the big monitor after committing -->
+        <VBox fx:id="resultBox" layoutX="421" layoutY="54" prefWidth="463" prefHeight="249" maxHeight="249"
+              spacing="6" alignment="TOP_CENTER" visible="false">
+            <PixelText bold="true" fx:id="resultTitle" pixel="3" fontSize="11"/>
+            <Label fx:id="resultAnswer" styleClass="result-answer" wrapText="true" prefWidth="460"/>
+            <Label fx:id="resultWhy" styleClass="result-why" wrapText="true" prefWidth="460"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button fx:id="continueButton" styleClass="neon-btn, neon-btn-green" onAction="#continueAfterResult">
+                <graphic><PixelText fx:id="continueText" text="CONTINUE &gt;" pixel="2" fontSize="10" color="#43ff6b"/></graphic>
+            </Button>
+        </VBox>
+
+        <!-- ===== Code window (programming questions) ===== -->
+        <VBox fx:id="codeWindow" styleClass="mock-panel, code-window" layoutX="10" layoutY="26" prefWidth="356" maxHeight="452" spacing="6" visible="false">
+            <padding><Insets top="10" bottom="10" left="12" right="12"/></padding>
+            <Label fx:id="codeTitle" styleClass="code-window-title"/>
+            <ScrollPane fx:id="codeScroll" styleClass="code-scroll" VBox.vgrow="ALWAYS"/>
+            <VBox fx:id="expectedBox" styleClass="expected-box" spacing="2">
+                <Label text="EXPECTED OUTPUT" styleClass="expected-title"/>
+                <Label fx:id="expectedLabel" styleClass="expected-text" wrapText="true"/>
             </VBox>
-            <Button fx:id="choice1" alignment="CENTER" contentDisplay="CENTER" layoutX="365.0" layoutY="86.0" mnemonicParsing="false" onAction="#answer1" text="Choice A" wrapText="true">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="choice2" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="140.0" mnemonicParsing="false" onAction="#answer2" text="Choice B" wrapText="true">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="choice3" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="196.0" mnemonicParsing="false" onAction="#answer3" text="Choice C" wrapText="true">
-                <font>
-                    <Font size="15.0" />
-                </font>
-            </Button>
-            <Button fx:id="choice4" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="278.0" mnemonicParsing="false" onAction="#answer4" text="Choice D" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-         </children></VBox>
-      <Button layoutX="521.0" layoutY="516.0" mnemonicParsing="false" onAction="#switchtoMainMenu" text="Back">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button layoutX="672.0" layoutY="513.0" mnemonicParsing="false" onAction="#nextQuestion" text="Next">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
+        </VBox>
 
-      <Label fx:id="scoreLabel" layoutX="184.0" layoutY="505.0" style="-fx-font-size: 18px;" text="Score: 0" />
+        <!-- ===== Right monitor HUD: proctor cam, dialogue, timer ===== -->
+        <VBox fx:id="monitor" layoutX="1030" layoutY="152" prefWidth="162" prefHeight="186" maxHeight="186" spacing="4">
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <ImageView fx:id="proctorFace" fitWidth="50" fitHeight="50"/>
+                <VBox spacing="0">
+                    <Label fx:id="proctorName" styleClass="monitor-name"/>
+                    <Label fx:id="proctorParadigm" styleClass="monitor-sub" wrapText="true" maxWidth="104"/>
+                </VBox>
+            </HBox>
+            <Label fx:id="speechLabel" styleClass="monitor-speech" wrapText="true" prefWidth="160" prefHeight="74" maxHeight="74" alignment="TOP_LEFT"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <HBox fx:id="timerRow" spacing="6" alignment="CENTER_LEFT">
+                <Label text="TIME" styleClass="monitor-sub"/>
+                <Label fx:id="timerLabel" text="00:45" styleClass="monitor-timer"/>
+            </HBox>
+            <ProgressBar fx:id="timerBar" prefWidth="160" prefHeight="6" progress="1" styleClass="monitor-bar"/>
+        </VBox>
 
-      <Label fx:id="livesLabel" layoutX="185.0" layoutY="544.0" style="-fx-font-size: 18px;" text="Lives: 3" />
-      <Label fx:id="feedbackLabel" layoutX="295.0" layoutY="507.0" style="-fx-font-size: 16px;" text="Choose your answer" />
-   </children>
-</AnchorPane>
+        <!-- ===== Lifelines (bottom-left) ===== -->
+        <VBox fx:id="lifelineBox" layoutX="6" layoutY="478" prefWidth="118" spacing="6"/>
+
+        <!-- ===== Survival ladder (bottom) ===== -->
+        <HBox alignment="CENTER" layoutY="684" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" pickOnBounds="false">
+            <HBox fx:id="ladderBox" styleClass="ladder-hud" spacing="4" alignment="CENTER"/>
+        </HBox>
+
+        <!-- ===== Top-right: employee + abort ===== -->
+        <HBox alignment="CENTER_RIGHT" spacing="10" AnchorPane.rightAnchor="8" AnchorPane.topAnchor="6">
+            <Label fx:id="employeeLabel" styleClass="hud-caption"/>
+            <Button styleClass="neon-btn, neon-btn-red, neon-btn-small" onAction="#abort">
+                <graphic><PixelText text="ABORT" pixel="2" fontSize="9" color="#ff5c6c"/></graphic>
+            </Button>
+        </HBox>
+    </AnchorPane>
+
+    <!-- red flash on crash -->
+    <Region fx:id="flash" style="-fx-background-color: #ff2a3c;" opacity="0" mouseTransparent="true"/>
+
+    <!-- modal overlay (abort confirm) -->
+    <StackPane fx:id="overlay" styleClass="overlay-dim" visible="false"/>
+</StackPane>

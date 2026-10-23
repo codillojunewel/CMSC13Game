@@ -1,0 +1,7 @@
+target/
+*.log
+hs_err_pid*
+replay_pid*
+.idea/
+*.iml
+tour-screenshots/
